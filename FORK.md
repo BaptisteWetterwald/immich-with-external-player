@@ -19,7 +19,7 @@ Ce patch a été développé avec un assistant LLM et n'est pas destiné à une 
 3. Ouvrir une vidéo qui vous appartient, puis son menu **⋮ → Ouvrir avec un
    lecteur externe**. Just Player est lancé directement s'il est installé ;
    sinon Android propose les lecteurs vidéo disponibles.
-4. Le réglage Immich **Charger les vidéos originales** choisit le fichier
+4. Le réglage Immich **Forcer la vidéo originale** choisit le fichier
    original. Sans ce réglage, le lecteur reçoit la vidéo optimisée du serveur,
    avec le comportement de repli standard d'Immich si aucune version encodée
    n'existe. Aucune copie complète préalable n'est nécessaire ; le serveur
