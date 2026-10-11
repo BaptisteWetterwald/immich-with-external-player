@@ -14,6 +14,8 @@ Ce patch a été développé avec un assistant LLM et n'est pas destiné à une 
    son adresse Tailscale : `http://100.x.x.x:2283`, un nom complet `*.ts.net`,
    ou son IPv6 Tailscale. Utiliser cette adresse pour toutes les adresses de
    connexion Immich si l'application choisit automatiquement un autre réseau.
+   Vérifier aussi que **Immich • Just Player** et **Just Player** ne sont pas exclus
+   du VPN dans le [split tunneling Android de Tailscale](https://tailscale.com/docs/features/client/android-app-split-tunneling).
 3. Ouvrir une vidéo qui vous appartient, puis son menu **⋮ → Ouvrir avec un
    lecteur externe**. Just Player est lancé directement s'il est installé ;
    sinon Android propose les lecteurs vidéo disponibles.
@@ -85,6 +87,8 @@ le SDK OpenAPI ainsi que les fichiers Flutter avant la compilation. Avec l'outil
 Mise du dépôt installé :
 
 ```bash
+mise install
+pnpm -w install --frozen-lockfile
 mise run //mobile:install:ci
 mise run //mobile:codegen
 cd mobile
@@ -118,3 +122,8 @@ cd android
 Les tests utilisent des API, DNS et requêtes simulés. La lecture réelle et les
 déplacements dans la vidéo doivent encore être vérifiés sur le téléphone connecté
 au serveur ; la VM ne contacte ni le téléphone ni le serveur privé.
+
+L'analyse Dart, le formatage Dart/JSON et les tests ciblés ont été exécutés.
+L'analyse complémentaire DCM n'a pas pu être exécutée : l'installation locale
+ne dispose pas d'une licence activée. `custom_lint` est désactivé dans la CI upstream
+de cette version.
