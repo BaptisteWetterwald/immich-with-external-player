@@ -92,10 +92,13 @@ pnpm -w install --frozen-lockfile
 mise run //mobile:install:ci
 mise run //mobile:codegen
 cd mobile
-flutter build apk --release --target-platform android-arm64 --no-pub
+flutter build apk --release --target-platform android-arm64 --split-per-abi \
+  --android-project-arg force-version-code-ignoring-abi=true --no-pub
 ```
 
-La sortie est `mobile/build/app/outputs/flutter-apk/app-release.apk`.
+La sortie est `mobile/build/app/outputs/flutter-apk/app-arm64-v8a-release.apk`.
+Le split exclut les autres architectures ; l'argument Gradle conserve le code
+de version d'Immich pour les prochaines mises à jour de ce fork.
 Pour la première compilation dans cette VM, les outils portables sont installés
 dans `/home/codex/projects/divers/.toolchains` ; charger leur `env.sh` remplace
 la sélection de versions via Mise.
