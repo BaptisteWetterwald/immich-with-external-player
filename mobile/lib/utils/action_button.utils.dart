@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:immich_mobile/constants/enums.dart';
 import 'package:immich_mobile/domain/models/album/album.model.dart';
@@ -13,6 +14,7 @@ import 'package:immich_mobile/presentation/actions/asset_debug.action.dart';
 import 'package:immich_mobile/presentation/actions/cast.action.dart';
 import 'package:immich_mobile/presentation/actions/delete.action.dart';
 import 'package:immich_mobile/presentation/actions/download.action.dart';
+import 'package:immich_mobile/presentation/actions/external_player.action.dart';
 import 'package:immich_mobile/presentation/actions/lock.action.dart';
 import 'package:immich_mobile/presentation/actions/open_in_browser.action.dart';
 import 'package:immich_mobile/presentation/actions/remove_from_album.action.dart';
@@ -62,6 +64,7 @@ enum ActionButtonType {
   likeActivity,
   share,
   shareLink,
+  externalPlayer,
   cast,
   setAlbumCover,
   similarPhotos,
@@ -86,6 +89,16 @@ enum ActionButtonType {
     return switch (this) {
       ActionButtonType.advancedInfo => context.advancedTroubleshooting,
       ActionButtonType.share => true,
+      ActionButtonType.externalPlayer =>
+        defaultTargetPlatform == TargetPlatform.android &&
+            context.asset is RemoteAsset &&
+            context.asset.isVideo &&
+            context.isOwner &&
+            !context.isInLockedView &&
+            !(context.asset as RemoteAsset).isLocked &&
+            !(context.asset as RemoteAsset).isTrashed &&
+            context.timelineOrigin != TimelineOrigin.trash &&
+            context.selectedCount == 1,
       ActionButtonType.shareLink =>
         !context.isInLockedView && //
             context.asset.hasRemote,
@@ -172,6 +185,7 @@ enum ActionButtonType {
     return switch (this) {
       ActionButtonType.advancedInfo => ActionMenuItem(action: AssetDebugAction(source: context.source)),
       ActionButtonType.share => ActionMenuItem(action: ShareAction(source: context.source)),
+      ActionButtonType.externalPlayer => ActionMenuItem(action: ExternalPlayerAction(source: context.source)),
       ActionButtonType.shareLink => ActionMenuItem(action: ShareLinkAction(source: context.source)),
       ActionButtonType.slideshow => const ActionMenuItem(action: SlideshowAction()),
       ActionButtonType.archive ||

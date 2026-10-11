@@ -190,6 +190,15 @@
 
 
   <queries>
+    <package android:name="com.brouken.player" />
+    <intent>
+      <action android:name="android.intent.action.VIEW" />
+      <data android:scheme="http" android:mimeType="video/*" />
+    </intent>
+    <intent>
+      <action android:name="android.intent.action.VIEW" />
+      <data android:scheme="https" android:mimeType="video/*" />
+    </intent>
     <intent>
       <action android:name="android.intent.action.VIEW" />
       <data android:scheme="https" />

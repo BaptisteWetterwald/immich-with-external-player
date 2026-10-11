@@ -36,13 +36,17 @@ android {
     compose true
   }
 
+  testOptions {
+    unitTests.includeAndroidResources = true
+  }
+
   defaultConfig {
-    applicationId "app.alextran.immich"
+    applicationId "app.alextran.immich.justplayer"
     minSdk = 26
     targetSdk = flutter.targetSdkVersion
     versionCode flutter.versionCode
     versionName flutter.versionName
-    resValue "string", "app_name", "Immich"
+    resValue "string", "app_name", "Immich • Just Player"
   }
 
   signingConfigs {
@@ -91,6 +95,9 @@ flutter {
 }
 
 dependencies {
+  testImplementation libs.junit
+  testImplementation libs.robolectric
+
   implementation libs.okhttp
   implementation libs.cronet.embedded
   implementation libs.media3.datasource.okhttp

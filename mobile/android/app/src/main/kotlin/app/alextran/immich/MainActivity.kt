@@ -11,6 +11,7 @@ import app.alextran.immich.background.BackgroundWorkerLockApi
 import app.alextran.immich.connectivity.ConnectivityApi
 import app.alextran.immich.connectivity.ConnectivityApiImpl
 import app.alextran.immich.core.HttpClientManager
+import app.alextran.immich.core.ExternalPlayerPlugin
 import app.alextran.immich.core.ImmichPlugin
 import app.alextran.immich.core.NetworkApiPlugin
 import me.albemala.native_video_player.NativeVideoPlayerPlugin
@@ -63,6 +64,7 @@ class MainActivity : FlutterFragmentActivity() {
       ConnectivityApi.setUp(messenger, ConnectivityApiImpl(ctx))
 
       flutterEngine.plugins.add(ViewIntentPlugin())
+      flutterEngine.plugins.add(ExternalPlayerPlugin())
       flutterEngine.plugins.add(backgroundEngineLockImpl)
       flutterEngine.plugins.add(nativeSyncApiImpl)
       flutterEngine.plugins.add(permissionApiImpl)
